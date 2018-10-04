@@ -39,7 +39,7 @@ class SplashView(object):
             return
 
         if self._pad is not None:
-            self._pad.clear()
+            self._pad.erase()
         else:
             self._pad = curses.newpad(20, 100)
 
@@ -67,7 +67,7 @@ class SplashView(object):
 
     async def _end_splash(self, nosplash):
         if not nosplash:
-            self._pad.clear()
+            self._pad.erase()
             await self._draw_pad_to_screen()
 
         await self._set_mode_callback(DEFAULT_MODE)
