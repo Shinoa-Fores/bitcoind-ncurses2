@@ -35,7 +35,7 @@ class HeaderView(object):
     async def _draw(self):
         # TODO: figure out window width etc.
 
-        self._pad.clear()
+        self._pad.erase()
 
         CGREEN = curses.color_pair(1)
         CCYAN = curses.color_pair(2)
