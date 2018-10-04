@@ -31,7 +31,7 @@ class MonitorView(view.View):
         super().__init__()
 
     async def _draw(self):
-        self._clear_init_pad()
+        self._erase_init_pad()
 
         if self._mempoolinfo:
             self._pad.addstr(9, 1, "Mempool transactions: {: 6d} ({: 5.2f} MiB)".format(
