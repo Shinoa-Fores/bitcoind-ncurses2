@@ -24,7 +24,7 @@ class FooterView(object):
         if self._pad is None:
             self._pad = curses.newpad(2, 100)
         else:
-            self._pad.clear()
+            self._pad.erase()
 
         CYELLOW = curses.color_pair(5)
         CBOLD = curses.A_BOLD
@@ -72,7 +72,7 @@ class FooterView(object):
     async def on_window_resize(self, y, x):
         # At the moment we ignore the x size and limit to 100.
         if y > self._window_size[0] and self._pad:
-            self._pad.clear()
+            self._pad.erase()
             await self._draw_pad_to_screen()
 
         self._window_size = (y, x)
