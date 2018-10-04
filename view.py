@@ -18,9 +18,9 @@ class View(object):
 
         self._window_size = MIN_WINDOW_SIZE
 
-    def _clear_init_pad(self):
+    def _erase_init_pad(self):
         if self._pad is not None:
-            self._pad.clear()
+            self._pad.erase()
         else:
             self._pad = curses.newpad(20, 100)
 
