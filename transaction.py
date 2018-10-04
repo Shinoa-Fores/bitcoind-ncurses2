@@ -247,7 +247,7 @@ class TransactionView(view.View):
         return
 
     async def _draw(self):
-        self._clear_init_pad()
+        self._erase_init_pad()
 
         if self._edit_mode:
             await self._draw_edit_mode()
