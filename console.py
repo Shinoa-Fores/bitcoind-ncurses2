@@ -32,7 +32,7 @@ class ConsoleView(view.View):
         super().__init__()
 
     async def _draw(self):
-        self._clear_init_pad()
+        self._erase_init_pad()
 
         CGREEN = curses.color_pair(1)
         CRED = curses.color_pair(3)
