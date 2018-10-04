@@ -20,7 +20,7 @@ class PeersView(view.View):
         super().__init__()
 
     async def _draw(self):
-        self._clear_init_pad()
+        self._erase_init_pad()
 
         if self._peerinfo:
             po = self._peerinfo
