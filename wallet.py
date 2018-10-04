@@ -67,7 +67,7 @@ class WalletView(view.View):
                 self._pad.addstr(2+((i-offset)*3)+1, 36, "{}".format(tx["txid"]), color)
 
     async def _draw(self):
-        self._clear_init_pad()
+        self._erase_init_pad()
 
         if self._wallet:
             await self._draw_wallet(self._wallet)
