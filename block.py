@@ -22,7 +22,7 @@ class BlockStore(object):
         self._bestblockhash = None
 
     async def get_block(self, blockhash):
-        with await self._lock:
+        async with self._lock:
             try:
                 return self._blocks[blockhash]
             except KeyError:
@@ -37,14 +37,14 @@ class BlockStore(object):
         return j["result"]
 
     async def get_previousblockhash(self, blockhash):
-        with await self._lock:
+        async with self._lock:
             try:
                 return self._blocks[blockhash]["previousblockhash"]
             except KeyError:
                 raise
 
     async def get_nextblockhash(self, blockhash):
-        with await self._lock:
+        async with self._lock:
             try:
                 return self._blocks[blockhash]["nextblockhash"]
             except KeyError:
@@ -55,7 +55,7 @@ class BlockStore(object):
             raise TypeError
 
         # This is based on height.
-        with await self._lock:
+        async with self._lock:
             try:
                 block = self._blocks[blockhash]
             except KeyError:
@@ -76,7 +76,7 @@ class BlockStore(object):
             raise TypeError
 
         # This is based on height.
-        with await self._lock:
+        async with self._lock:
             try:
                 block = self._blocks[blockhash]
             except KeyError:
@@ -98,13 +98,13 @@ class BlockStore(object):
             raise
 
     async def on_bestblockhash(self, blockhash):
-        with await self._lock:
+        async with self._lock:
             self._bestblockhash = blockhash
 
         # Pre-fetch it if necessary and update the previous block
         # TODO: think about the locking here.
         block = await self.get_block(blockhash)
-        with await self._lock:
+        async with self._lock:
             try:
                 prevblock = self._blocks[block["previousblockhash"]]
             except KeyError:
@@ -119,7 +119,7 @@ class BlockStore(object):
             prevblock["nextblockhash"] = blockhash
 
     async def get_bestblockhash(self):
-        with await self._lock:
+        async with self._lock:
             if self._bestblockhash is None:
                 raise KeyError
 

@@ -147,7 +147,7 @@ class MonitorView(view.View):
 
     async def _draw_if_visible(self):
         """ Override the view.View method because we need to lock. """
-        with await self._lock:
+        async with self._lock:
             if self._visible:
                 await self._draw()
 
@@ -178,7 +178,7 @@ class MonitorView(view.View):
             return
 
         draw = False
-        with await self._lock:
+        async with self._lock:
             if bestblockhash != self._bestblockhash:
                 draw = True
                 self._bestblockhash = bestblockhash
@@ -210,7 +210,7 @@ class MonitorView(view.View):
         await self._draw_if_visible()
 
     async def on_tick(self, dt):
-        with await self._lock:
+        async with self._lock:
             self._dt = dt
 
         await self._draw_if_visible()

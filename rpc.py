@@ -124,7 +124,7 @@ class BitcoinRPCClient(object):
 
     async def _fetch(self, session, req):
         try:
-            with async_timeout.timeout(5):
+            async with async_timeout.timeout(5):
                 async with session.post(self._url, headers=self._headers, data=req) as response:
                     return await response.text()
         except asyncio.TimeoutError:

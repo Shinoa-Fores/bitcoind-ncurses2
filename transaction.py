@@ -20,7 +20,7 @@ class TransactionStore(object):
         self._transactions = {}  # txid -> raw transaction
 
     async def get_transaction(self, txid):
-        with await self._lock:
+        async with self._lock:
             try:
                 return self._transactions[txid]
             except KeyError:
